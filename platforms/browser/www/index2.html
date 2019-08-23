@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+	  
+	
+	<style>
+body {margin:0;}
+
+ul.footer {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: lightgray;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+li.lifooter {
+    float: left;
+}
+
+li.lifooter a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li.lifooter a:hover:not(.active) {
+   */ background-color: #111;*/
+}
+
+.active {
+ */   background-color: #4CAF50;*/
+}
+</style>
+	
+    <title>Bolão Megasena</title>
+	
+	<script>
+		 function pegaImagens(id)
+		{
+         var params = "id="+id;
+                var resultado = 0;
+                var xmlhttp = new XMLHttpRequest();
+				
+                xmlhttp.open("GET","https://projetofauna.jbrj.gov.br/listafotos.php?"+params,false);
+                xmlhttp.onload = function (){
+                    if (xmlhttp.status==200)
+                        {
+						   	var html = this.responseText;
+							document.getElementById("imagem").innerHTML = html;
+                        }
+                    else if (xmlhttp.status == 404) {
+                        alert("Web Service doesn't work");
+                    }
+                    else
+                        {
+                            alert("Unknown erro occurred while trying insert data");
+                        }
+                };
+                xmlhttp.send();
+                return resultado;       
+     }
+	</script>
+	
+	
+</head>
+
+<body>
+<ul class="footer">
+  <li class="lifooter"></span></li>
+</ul>
+
+<!-- Modal content-->
+ <div class="modal fade" id="myModalSobre" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Bolão Megasena</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+			<label for="email">Conta para depósito<br>
+			</label>
+			<label for="email">Banco 001 - Banco do Brasil<br>
+			</label>
+			<label for="email">Agencia 1572-5<br>
+			</label>
+			<label for="email">Conta: 9.058-1<br>
+			</label>
+			<label for="email">Rafael Oliveira Lima<br>
+			</label>
+			<label for="email">CPF: 038817487-09<br>
+			</label>
+		  </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+	 </div>
+	</div>
+
+
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  	
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>	
+		  </button>
+		  
+
+<a class="navbar-brand" href="index2.html">Bolão 0.1</a>
+		  <span id="div_dadoslogin" ></span>
+
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">	
+			<ul class="nav navbar-nav">
+			  <li class="active"><a data-toggle="pill" href="#home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+			  <li class='hidden'><a data-toggle="pill" href="#lancarcredito" >Credito</a></li>
+			  <li class='hidden'><a data-toggle="pill" href="#lancaraposta" > Aposta</a></li>
+			  <li class='hidden'><a data-toggle="pill" href="#consextratogeral" >Extrato Geral</a></li>
+			  <li><a onclick='lancarcredito()'><span class="glyphicon glyphicon-usd"></span> Lançar Crédito</a></li>
+			  <li><a onclick='lancaraposta()'><span class="glyphicon glyphicon-shopping-cart"></span> Lançar Aposta</a></li>
+			  <li><a data-toggle="pill" href="#contadeposito"><span class="glyphicon glyphicon-credit-card"></span> Conta para depósito</a></li>
+			  <li><a onclick='carregaatendimento()'><span class="glyphicon glyphicon-list-alt"></span> Consulta Extrato</a></li>
+			  <li><a onclick='consultaextratogeral()'><span class="glyphicon glyphicon-list-alt"></span> Consulta Extrato Geral</a></li>
+			  <li class='hidden'><a data-toggle="pill" href="#consextrato">Cons. Atendimento</a></li>
+			  <li><a data-toggle="pill" href="#trocarsenha"><span class="glyphicon glyphicon-log-in"></span> Trocar Senha</a></li>
+			  <li><a data-toggle="pill" href="#login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+			  <li><a onclick='exitFromApp()'><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
+			</ul>
+			
+		</div>
+	  </div>
+	</nav>
+	
+	<input type='hidden' name='idusuario' id='idusuario' value=''>
+	<input type='hidden' name='nome' id='nome' value=''>
+	<div class="tab-content" id="mytab">
+	
+		<div id="consatendimento" class="tab-pane fade">
+			<div class="container" id='chamados'>
+			</div>
+		</div>
+
+		<div id="consextrato" class="tab-pane fade">
+			<div class="container" id='divextrato'>
+			</div>
+		</div>
+		<div id="consextratogeral" class="tab-pane fade">
+			<div class="container" id='divextratogeral'>
+			</div>
+		</div>
+	
+		<div id="lancarcredito" class="tab-pane fade">
+		  <form name='frmcredito' id='frmcredito' method='post'>
+			<div class="container">
+				<h3>Crédito</h3>
+				<div class="form-group">
+					<label for="edtdatacredito">Jogador:</label>
+					<select class="form-control input-sm" id='cmboxjogador' name='cmboxjogador' >
+						<option value='10'>Albertino</option>
+						<option value='14'>Carlos</option>
+						<option value='3'>Christian</option>
+						<option value='18'>Débora JBRJ</option>
+						<option value='19'>Débora Lima</option>
+						<option value='16'>Fábio Eletricista</option>
+						<option value='2'>Fatima</option>
+						<option value='7'>Felipe Alves</option>
+						<option value='20'>Glaucia</option>
+						<option value='17'>Harry Potter</option>
+						<option value='9'>Ivair</option>
+						<option value='6'>Leonardo</option>
+						<option value='21'>Maíra</option>
+						<option value='13'>Marcelo Velho</option>
+						<option value='11'>Marcia</option>
+						<option value='15'>Maurício Ferrão</option>
+						<option value='8'>Paulo Victor</option>
+						<option value='1'>Rafael Lima</option>
+						<option value='4'>Silvania</option>
+						<option value='12'>Vertice</option>
+						<option value='5'>Wellington</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="edtdatacredito">Data:</label>
+					<input type="text" class="form-control input-sm" id="edtdatacredito" name="edtdatacredito" value="">
+				</div>
+				<div class="form-group">
+					<label for="edtvaloraposta">Valor:</label>
+					<input type="text" class="form-control input-sm" id="edtvalorcredito" name="edtvalorcredito">
+				</div>
+				<div class="form-group">
+					<label for="edtobservacao">Obs:</label>
+					<input type="text" class="form-control input-sm" id="edtdescricaocredito" name="edtdescricaocredito">
+				</div>
+				<button type="button" class="btn btn-success btn-block" onclick="lancarCredito()">Salvar</button>
+			</div>
+			
+			</form>
+		</div>
+		
+		<div id="lancaraposta" class="tab-pane fade">
+		  <form name='frmcredito2' id='frmcredito2' method='post'>
+			<div class="container">
+				<h3>Lançar Aposta</h3>
+				<div class="form-group">
+					<label for="edtdataaposta">Data:</label>
+					<input type="text" class="form-control input-sm" id="edtdataaposta" name="edtdataaposta" value="">
+				</div>
+				<div class="form-group">
+					<label for="edtvaloraposta">Valor:</label>
+					<input type="text" class="form-control input-sm" id="edtvaloraposta" name="edtvaloraposta">
+				</div>
+				<div class="form-group">
+					<label for="edtdescricaoaposta">Obs:</label>
+					<input type="text" class="form-control input-sm" id="edtdescricaoaposta" name="edtdescricaoaposta">
+				</div>
+				<button type="button" class="btn btn-success btn-block" onclick="lancarAposta()">Salvar</button>
+			</div>
+			
+			</form>
+		</div>
+	
+		<div id="contadeposito" class="tab-pane fade">
+			<div class="container">
+				<h3>Conta Déposito</h3>
+				<div class="form-group">
+					<label for="email">Banco 001 - Banco do Brasil<br>
+					</label>
+					<br>
+					<label for="email">Agencia 1572-5<br>
+					</label>
+					<br>
+					<label for="email">Conta: 9.058-1<br>
+					</label>
+					<br>
+					<label for="email">Rafael Oliveira Lima<br>
+					</label>
+					<br>
+					<label for="email">CPF: 038817487-09<br>
+					</label>
+					<br>
+				</div>
+			</div>
+		</div>
+	
+		
+
+		<div id="login" class="tab-pane fade">
+			<div class="container">
+				<div class="app">
+					<!--<h1>Fauna JBRJ</h1>-->
+			
+				
+				<div class="form-group">
+					<label for="email">Usuário:</label>
+					<input type="text" class="form-control" id="edtlogin">
+					<input type="hidden" class="form-control" id="edtuuid">
+				</div>
+				<div class="form-group">
+					<label for="pwd">Senha:</label>
+					<input type="password" class="form-control" id="edtsenha">
+				</div>
+				<button  type="button" onclick='login()' class="btn btn-success btn-block">Enviar</button>
+				
+				</div>
+			</div>
+		</div>
+		
+		<div id="trocarsenha" class="tab-pane fade">
+			<div class="container">
+				<h3>Alterar Senha</h3>
+					<!--<h1>Fauna JBRJ</h1>-->
+				<div class="form-group">
+					<label for="novasenha">Nova senha:</label>
+					<input type="text" class="form-control" id="edtnovasenha">
+				</div>
+				<div class="form-group">
+					<label for="confirmacaosenha">Confirmação da senha:</label>
+					<input type="text" class="form-control" id="edtconfirmacaosenha">
+				</div>
+				<button  type="button" onclick='alterarSenha()' class="btn btn-success btn-block">Enviar</button>
+				
+			</div>
+		</div>
+		
+		
+		<div id="home" class="tab-pane fade in active">
+			<div class="container">
+				<div class="app">
+					<!--<h1>Fauna JBRJ</h1>-->
+					<div id="deviceready" class="blink">
+						<p class="event listening">Conectando</p>
+						<p class="event received">Pronto para o uso</p>
+					</div>
+					<br>
+				</div>
+				<div class="app2">
+					<div class="container" id='chamadosparaatender'>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+
+	</div>
+	
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+		$("ul").on("click", function(){
+
+			$('.navbar-collapse').collapse('hide');
+			
+		});
+
+		
+		function alterarSenha()
+		{
+			var novasenha = document.getElementById('edtnovasenha').value;
+			var confirmacaosenha = document.getElementById('edtconfirmacaosenha').value;
+			var codusuario = window.localStorage.getItem("idusuario");
+			var params = "idusuario="+codusuario+"&senha="+novasenha;
+			var resultado = 0;
+			var xmlhttp = new XMLHttpRequest();
+			
+			xmlhttp.open("GET","http://tempustecnologia.com/acoes/exec.alterarsenha.php?"+params,true);
+			xmlhttp.onload = function (){
+			if (xmlhttp.status==200)
+				{
+					var str = xmlhttp.responseText;
+					//alert(str);
+					if (str==true)
+					{
+						navigator.notification.alert(
+									'Alterado com sucesso.',  // message
+									alertDismissed,         // callback
+									'Atenção',            // title
+									'OK'                  // buttonName
+						);
+						//alert('alterado com sucesso');
+					}
+					else
+					{
+						navigator.notification.alert(
+									'Não foi possível alterar.',  // message
+									alertDismissed,         // callback
+									'Atenção',            // title
+									'OK'                  // buttonName
+						);
+						//alert('Não foi possível alterar');
+					}
+					$('#myNavbar a[href="#home"]').tab('show');
+				}
+				else if (xmlhttp.status == 404) {
+					alert("Web Service doesn't work");
+				}
+				else
+				{
+					alert("Unknown erro occurred while trying insert data");
+				}
+			};
+			xmlhttp.send();
+			return resultado;  
+		}
+
+		function lancarcredito()
+		{
+			var idusuario = window.localStorage.getItem("idusuario");
+			if (idusuario == null) {
+				$('#myNavbar a[href="#login"]').tab('show');
+				
+			}
+			else
+			{
+				if (idusuario==1)
+				{
+					$('#myNavbar a[href="#lancarcredito"]').tab('show');
+					document.getElementById('edtvalorcredito').value='';
+					document.getElementById('edtdatacredito').value='';
+					document.getElementById('edtdescricaocredito').value='';
+					document.getElementById('cmboxjogador').value='';
+					$(".botao").removeAttr("disabled");
+					var date = new Date();
+					var day = date.getDate();
+					var month = date.getMonth();
+					var year = date.getFullYear();
+					document.getElementById("edtdatacredito").value = day + '/' + (month+1) + '/' + year;
+				}
+				else
+				{
+					navigator.notification.alert(
+									'Você não possui permissão para essa função. Entre em contato com o administrador.',  // message
+									alertDismissed,         // callback
+									'Atenção',            // title
+									'OK'                  // buttonName
+								);
+				}
+			}
+		
+		
+		}
+		
+		function lancaraposta()
+		{
+			var idusuario = window.localStorage.getItem("idusuario");
+			if (idusuario == null) {
+				$('#myNavbar a[href="#login"]').tab('show');
+			}
+			else
+			{
+				if (idusuario==1)
+				{
+					$('#myNavbar a[href="#lancaraposta"]').tab('show');
+					document.getElementById('edtvaloraposta').value='';
+					document.getElementById('edtdataaposta').value='';
+					document.getElementById('edtdescricaoaposta').value='';
+					$(".botao").removeAttr("disabled");
+					var date = new Date();
+					var day = date.getDate();
+					var month = date.getMonth();
+					var year = date.getFullYear();
+					document.getElementById("edtdataaposta").value = day + '/' + (month+1) + '/' + year;
+				}
+				else
+				{
+					navigator.notification.alert(
+									'Você não possui permissão para essa função. Entre em contato com o administrador.',  // message
+									alertDismissed,         // callback
+									'Atenção',            // title
+									'OK'                  // buttonName
+								);
+				}
+			}
+		
+		
+		}		
+		
+		function meuschamados()
+		{
+					
+
+		// retorna uma lista de chamados que pertence ao usuário logado
+		// caso não esteja logado, redireciona para a pagina de login
+			var idusuario = window.localStorage.getItem("idusuario");
+			if (idusuario == null)
+			{
+				$('#myNavbar a[href="#login"]').tab('show');
+			}
+			else
+			{
+				$('#myNavbar a[href="#consatendimento"]').tab('show');
+				getMeusChamados();
+			}
+		}
+		
+	
+		function carregaatendimento() 
+		{
+
+		    var idusuario = window.localStorage.getItem("idusuario");
+			if (idusuario == null) 
+			{
+				$('#myNavbar a[href="#login"]').tab('show');
+			}
+			else
+			{			
+				$('#myNavbar a[href="#consextrato"]').tab('show');
+				getExtrato(idusuario);
+		   }
+		}
+		function consultaextratogeral() 
+		{
+		    var idusuario = window.localStorage.getItem("idusuario");
+			if (idusuario == null) 
+			{
+				$('#myNavbar a[href="#login"]').tab('show');
+			}
+			else
+			{			
+				if (idusuario==1)
+				{
+					$('#myNavbar a[href="#consextratogeral"]').tab('show');
+					getExtratoGeral();
+				}
+				else
+				{
+					navigator.notification.alert(
+									'Você não possui permissão para essa função. Entre em contato com o administrador.',  // message
+									alertDismissed,         // callback
+									'Atenção',            // title
+									'OK'                  // buttonName
+								);
+				}
+		   }
+		}
+
+navigator.notification.alert(
+									'Verifique o preenchimento dos campos.',  // message
+									alertDismissed,         // callback
+									'Atenção',            // title
+									'OK'                  // buttonName
+								);
+
+		
+		function exitFromApp(){
+		   window.localStorage.clear();
+		   navigator.app.exitApp();
+		}
+		
+
+		function leftPad(value, totalWidth, paddingChar) {
+			var length = totalWidth - value.toString().length + 1;
+			return Array(length).join(paddingChar || '0') + value;
+		};
+
+
+		
+		function lancarCredito()
+		{
+			if ((document.getElementById('edtvalorcredito').value=='') ||
+			(document.getElementById('edtdatacredito').value=='') ||
+			(document.getElementById('cmboxjogador').value=='')
+			)
+			{
+				navigator.notification.alert(
+									'Verifique o preenchimento dos campos.',  // message
+									alertDismissed,         // callback
+									'Atenção',            // title
+									'OK'                  // buttonName
+								);
+			}
+			else
+			{
+				var codusuario = window.localStorage.getItem("idusuario");
+
+				var descricaocredito = document.getElementById('edtdescricaocredito').value;
+				var valorcredito = document.getElementById('edtvalorcredito').value;
+				var datacredito = document.getElementById('edtdatacredito').value;
+				var idjogador = document.getElementById('cmboxjogador').value;
+				alert('Jogador: '+idjogador);
+				alert('datacredito: '+datacredito);
+				
+				var params = "op=I&idjogador="+idjogador+"&datacredito="+datacredito+"&valorcredito="+valorcredito+"&descricaocredito="+descricaocredito;
+                //alert(params);
+				var resultado = 0;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET","http://tempustecnologia.com/acoes/exec.credito.php?"+params,false);
+		
+                xmlhttp.onload = function (){
+                    if (xmlhttp.status==200)
+                        {
+        					resultado = xmlhttp.responseText;
+							alert(resultado);
+							$('#myNavbar a[href="#consextrato"]').tab('show');
+							getExtrato(idjogador);
+                        }
+                    else if (xmlhttp.status == 404) {
+                        alert("Web Service doesn't work");
+                        
+                    }
+                    else
+                        {
+                            alert("Unknown erro occurred while trying insert data");
+                        }
+                };
+                xmlhttp.send();
+				
+        }
+     }
+
+	 	function lancarAposta()
+		{
+			if ((document.getElementById('edtvaloraposta').value=='') ||
+			(document.getElementById('edtdataaposta').value=='') 
+			
+			)
+			{
+				navigator.notification.alert(
+									'Verifique o preenchimento dos campos.',  // message
+									alertDismissed,         // callback
+									'Atenção',            // title
+									'OK'                  // buttonName
+								);
+			}
+			else
+			{
+				var codusuario = window.localStorage.getItem("idusuario");
+
+				var descricaoaposta = document.getElementById('edtdescricaoaposta').value;
+				var valoraposta = document.getElementById('edtvaloraposta').value;
+				var dataaposta = document.getElementById('edtdataaposta').value;
+				alert('descricaoaposta: '+descricaoaposta);
+				alert('valoraposta: '+valoraposta);
+				alert('datacredito: '+dataaposta);
+				
+				var params = "op=IC&dataaposta="+dataaposta+"&valoraposta="+valoraposta+"&descricaoaposta="+descricaoaposta;
+                //alert(params);
+				var resultado = 0;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET","http://tempustecnologia.com/acoes/exec.credito.php?"+params,false);
+		
+                xmlhttp.onload = function (){
+                    if (xmlhttp.status==200)
+                        {
+        					resultado = xmlhttp.responseText;
+							alert(resultado);
+							$('#myNavbar a[href="#consextrato"]').tab('show');
+							getExtrato(1);
+                        }
+                    else if (xmlhttp.status == 404) {
+                        alert("Web Service doesn't work");
+                        
+                    }
+                    else
+                        {
+                            alert("Unknown erro occurred while trying insert data");
+                        }
+                };
+                xmlhttp.send();
+				
+        }
+     }
+
+		function getExtrato(id)
+		{
+         var params = "idusuario="+id;
+                var resultado = 0;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET","http://tempustecnologia.com/acoes/getextrato.php?"+params,true);
+                xmlhttp.onload = function (){
+                    if (xmlhttp.status==200)
+                        {
+						    var str = xmlhttp.responseText;
+							document.getElementById("divextrato").innerHTML=str;
+							/*alert(id);
+							if (id==0)
+							{
+							}
+							else
+							{
+								document.getElementById("chamados").innerHTML=str;
+							}
+							*/
+						}
+                    else if (xmlhttp.status == 404) {
+                        alert("Web Service doesn't work");
+                    }
+                    else
+                        {
+                            alert("Unknown erro occurred while trying insert data");
+                        }
+                };
+                xmlhttp.send();
+                return resultado;       
+       }
+	   
+	   	function getExtratoGeral()
+		{
+         var params = "tipo=geral";
+                var resultado = 0;
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("GET","http://tempustecnologia.com/acoes/getextrato.php?"+params,true);
+                xmlhttp.onload = function (){
+                    if (xmlhttp.status==200)
+                        {
+						    var str = xmlhttp.responseText;
+							document.getElementById("divextratogeral").innerHTML=str;
+							/*alert(id);
+							if (id==0)
+							{
+							}
+							else
+							{
+								document.getElementById("chamados").innerHTML=str;
+							}
+							*/
+						}
+                    else if (xmlhttp.status == 404) {
+                        alert("Web Service doesn't work");
+                    }
+                    else
+                        {
+                            alert("Unknown erro occurred while trying insert data");
+                        }
+                };
+                xmlhttp.send();
+                return resultado;       
+       }
+	   
+	   
+		function getMeusChamados()
+		{
+		 var codusuario = window.localStorage.getItem("idusuario");
+		 //var codusuario = document.getElementById('idusuario').value;
+//		 alert(codusuario);
+         var params = "idusuario="+codusuario;
+                var resultado = 0;
+                var xmlhttp = new XMLHttpRequest();
+				
+                xmlhttp.open("GET","http://tempustecnologia.com/acoes/getlote.php?"+params,true);
+                xmlhttp.onload = function (){
+                    if (xmlhttp.status==200)
+                        {
+						    var str = xmlhttp.responseText;
+							document.getElementById("chamados").innerHTML=str;
+                        }
+                    else if (xmlhttp.status == 404) {
+                        alert("Web Service doesn't work");
+                    }
+                    else
+                        {
+                            alert("Unknown erro occurred while trying insert data");
+                        }
+                };
+                xmlhttp.send();
+                return resultado;       
+       }
+	   
+	   
+	   function mostraChamadosParaAtender(id)
+	   {
+	   //alert('');
+			var params = "idusuario="+id; // para atender
+            var resultado = 0;
+            var xmlhttp = new XMLHttpRequest();
+				
+                xmlhttp.open("GET","http://tempustecnologia.com/acoes/getresumoconta.php?"+params,true);
+                xmlhttp.onload = function (){
+                    if (xmlhttp.status==200)
+                        {
+						    var str = xmlhttp.responseText;
+							document.getElementById("chamadosparaatender").innerHTML=str;
+                        }
+                    else if (xmlhttp.status == 404) {
+                        alert("Web Service doesn't work");
+                    }
+                    else
+                        {
+                            alert("Unknown erro occurred while trying insert data");
+                        }
+                };
+                xmlhttp.send();
+				return resultado;   
+	   }
+		
+		function alertDismissed() {
+
+		}
+
+		
+		function login()
+		{
+		//alert('1');
+		var login = document.getElementById('edtlogin').value;
+		var senha = document.getElementById('edtsenha').value;
+		var uuid = document.getElementById('edtuuid').value;
+		//alert(ime);
+		//alert(uuid);
+
+	     //document.getElementById('edtlabel').innerHTML="Usuario: "+usuario+" Lat/Long: "+latitude + ','+ longitude + ' Equipe: '+equipe;
+         var params = "edtlogin="+login+"&edtsenha="+senha+"&edtuuid="+uuid;
+                var resultado = 0;
+                var xmlhttp = new XMLHttpRequest();
+                //alert(latitude);
+				
+                xmlhttp.open("GET","http://tempustecnologia.com/acoes/testaloginapp.php?"+params,false);
+				//xmlhttp.setRequestHeader( 'Access-Control-Allow-Origin', '*');
+				xmlhttp.onload = function (){
+					//alert(xmlhttp.status);
+					if (xmlhttp.status==200)
+                        {
+						    var str = xmlhttp.responseText;
+							//alert(str);
+							if (str.substring(0, 4)=='ERRO')
+							{
+								document.getElementById('div_dadoslogin').innerHTML='<p class="navbar-text">LOGIN INVÁLIDO</p>';
+
+								/*navigator.notification.alert(
+									'Não foi possível efetuar o login.',  // message
+									alertDismissed,         // callback
+									'Atenção',            // title
+									'OK'                  // buttonName
+								);
+								*/
+								alert('Não foi possível efetuar o login.');
+							}
+							else
+							{
+								
+								var res = str.split("|");
+								//alert(res[0]);
+								var codusuario = res[0];
+								var username = res[1];
+								//var idtiposuaurio = res[2];
+								//var tiposuaurio = res[3];
+								//var idsituacaousuario = res[4];
+
+								window.localStorage.setItem("uname", username);
+								window.localStorage.setItem("idusuario",codusuario);
+								
+								document.getElementById('div_dadoslogin').innerHTML='<p class="navbar-text">'+username+'</p>';
+								
+								document.getElementById('idusuario').value=window.localStorage.getItem("idusuario");
+								document.getElementById('nome').value=window.localStorage.getItem("uname");
+								// rafael
+								//alert('Login efetuado com sucesso. Cod:'+window.localStorage.getItem("idusuario")+' - '+window.localStorage.getItem("uname"));
+								/*navigator.notification.alert(
+				'Login efetuado com sucesso.',  // message
+				alertDismissed,         // callback
+				'Atenção',            // title
+				'OK'                  // buttonName
+				);
+				*/
+								$('#myNavbar a[href="#home"]').tab('show');
+
+								/*
+								navigator.notification.alert(
+				'Login efetuado com sucesso.',  // message
+				alertDismissed,         // callback
+				'Atenção',            // title
+				'OK'                  // buttonName
+				);
+				*/
+								//alert('Login efetuado com sucesso');
+								
+							/*	navigator.notification.alert(
+    'Usuário: '+res[1],  // message
+    alertDismissed,         // callback
+    'Login',            // title
+    'OK'                  // buttonName
+);
+	*/							//$("#login").removeClass("in active");
+								//$("#busca").addClass("in active");
+                            }
+
+							//alert(params);
+                            //alert(xmlhttp.responseText);
+							//$('#myNavbar a[href="#home"]').tab('show');
+							//alert(codusuario);
+							if (codusuario!='')
+							{
+								mostraChamadosParaAtender(codusuario);
+							}
+
+                        }
+                    else if (xmlhttp.status == 404) {
+                        alert("Web Service doesn't work");
+                        
+                    }
+                    else
+                        {
+                            alert("Unknown erro occurred while trying insert data");
+                        }
+                };
+                xmlhttp.send();
+                return resultado;
+				
+         
+     }
+	 
+	$( document ).ready(function() {
+		// Handler for .ready() called.
+		
+		/*		
+		var idusuario = window.localStorage.getItem("idusuario");
+		//alert(idusuario);
+		if (idusuario == null)
+		{
+			$('#myNavbar a[href="#login"]').tab('show');
+		}
+		else
+		{
+			$('#myNavbar a[href="#home"]').tab('show');
+		}
+		*/
+	});
+
+
+    </script>
+</body>
+
+</html>
