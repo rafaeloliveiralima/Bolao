@@ -231,6 +231,7 @@ li.lifooter a:hover:not(.active) {
 						<option value='4'>Silvania</option>
 						<option value='12'>Vertice</option>
 						<option value='5'>Wellington</option>
+						<option value='22'>Carla (Maurício)</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -293,6 +294,26 @@ li.lifooter a:hover:not(.active) {
 					</label>
 					<br>
 				</div>
+				
+				<h3>Conta Déposito</h3>
+				<div class="form-group">
+					<label for="email">Banco 336 - C6<br>
+					</label>
+					<br>
+					<label for="email">Agencia 0001<br>
+					</label>
+					<br>
+					<label for="email">Conta: 89765-5<br>
+					</label>
+					<br>
+					<label for="email">Rafael Oliveira Lima<br>
+					</label>
+					<br>
+					<label for="email">CPF: 038817487-09<br>
+					</label>
+					<br>
+				</div>
+				
 			</div>
 		</div>
 	
@@ -592,8 +613,8 @@ navigator.notification.alert(
 				var valorcredito = document.getElementById('edtvalorcredito').value;
 				var datacredito = document.getElementById('edtdatacredito').value;
 				var idjogador = document.getElementById('cmboxjogador').value;
-				alert('Jogador: '+idjogador);
-				alert('datacredito: '+datacredito);
+				//alert('Jogador: '+idjogador);
+				//alert('datacredito: '+datacredito);
 				
 				var params = "op=I&idjogador="+idjogador+"&datacredito="+datacredito+"&valorcredito="+valorcredito+"&descricaocredito="+descricaocredito;
                 //alert(params);
@@ -605,7 +626,7 @@ navigator.notification.alert(
                     if (xmlhttp.status==200)
                         {
         					resultado = xmlhttp.responseText;
-							alert(resultado);
+							//alert(resultado);
 							$('#myNavbar a[href="#consextrato"]').tab('show');
 							getExtrato(idjogador);
                         }
@@ -644,9 +665,9 @@ navigator.notification.alert(
 				var descricaoaposta = document.getElementById('edtdescricaoaposta').value;
 				var valoraposta = document.getElementById('edtvaloraposta').value;
 				var dataaposta = document.getElementById('edtdataaposta').value;
-				alert('descricaoaposta: '+descricaoaposta);
-				alert('valoraposta: '+valoraposta);
-				alert('datacredito: '+dataaposta);
+				//alert('descricaoaposta: '+descricaoaposta);
+				//alert('valoraposta: '+valoraposta);
+				//alert('datacredito: '+dataaposta);
 				
 				var params = "op=IC&dataaposta="+dataaposta+"&valoraposta="+valoraposta+"&descricaoaposta="+descricaoaposta;
                 //alert(params);
@@ -658,7 +679,7 @@ navigator.notification.alert(
                     if (xmlhttp.status==200)
                         {
         					resultado = xmlhttp.responseText;
-							alert(resultado);
+							//alert(resultado);
 							$('#myNavbar a[href="#consextrato"]').tab('show');
 							getExtrato(1);
                         }
